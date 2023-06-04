@@ -1,0 +1,59 @@
+﻿<Page x:Class="WpfAppProject.pages.PageList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfAppProject.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageList">
+    <Page.Resources>
+        <BitmapImage x:Key="NoPhoto" UriSource="/images/picture.png"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel>
+                <GroupBox Header="Поиск">
+                    <TextBox Name="TbSearch" SelectionChanged="TbSearch_SelectionChanged"/>
+                </GroupBox>
+                <GroupBox Header="Поиск">
+                    <DatePicker Name="dpSearch" SelectedDateChanged="dpSearch_SelectedDateChanged"/>
+                </GroupBox>
+                <GroupBox Header="Роль">
+                    <ComboBox Name="CmbSortRole" SelectionChanged="CmbSortRole_SelectionChanged"/>
+                </GroupBox>
+                <GroupBox Header="Фильтрация">
+                    <ComboBox Name="CmbSort" SelectionChanged="CmbSortRole_SelectionChanged">
+                        <ComboBoxItem Content="Без фильтрации"/>
+                        <ComboBoxItem Content="По возрастинию"/>
+                        <ComboBoxItem Content="По убыванию"/>
+                    </ComboBox>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+        <ListView Name="lvUsers" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="2" BorderBrush="Black" CornerRadius="2" Padding="5">
+                        <Grid Background="{Binding Color}">
+                            <StackPanel>
+                                <Image Width="200" Source="{Binding Photo, TargetNullValue={StaticResource NoPhoto}}"/>
+                                <TextBlock Text="{Binding FIO}"/>
+                                <TextBlock Text="{Binding UserBirthday}"/>
+                                <TextBlock Text="{Binding UserPhone}"/>
+                                <Button Name="BtnUpdate" Uid="{Binding UserId}" Content="Update" Loaded="BtnUpdate_Loaded" Click="BtnUpdate_Click"/>
+                                <Button Name="BtnDelete" Uid="{Binding UserId}" Content="Delete" Loaded="BtnDelete_Loaded" Click="BtnDelete_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

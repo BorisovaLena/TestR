@@ -1,0 +1,29 @@
+﻿<Page x:Class="WpfAppProject.pages.PageAuto"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfAppProject.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageAuto">
+
+    <Grid>
+        <StackPanel Width="300">
+            <GroupBox Header="Логин">
+                <TextBox Name="TbLogin"/>
+            </GroupBox>
+            <GroupBox Name="gbP" Header="Пароль" Visibility="Collapsed">
+                <TextBox Name="TbPassword"/>
+            </GroupBox>
+            <GroupBox Name="gbPP" Header="Пароль">
+                <PasswordBox Name="PbPassword"/>
+            </GroupBox>
+            <CheckBox Name="CbCb" Content="Показать пароль" Checked="CbCb_Checked" Unchecked="CbCb_Unchecked"/>
+            <Button Name="BtnEnter" Content="Enter" Click="BtnEnter_Click"/>
+            <Button Name="BtnRegistration" Content="Reg" Click="BtnRegistration_Click"/>
+            <Button Name="BtnPDF" Content="PDF" Click="BtnPDF_Click"/>
+        </StackPanel>
+        
+    </Grid>
+</Page>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище TestBaseQWERTModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TableRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TableUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPatronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserBirthday" Type="date" Nullable="false" />
+          <Property Name="UserRole" Type="int" Nullable="false" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserPassword" Type="int" Nullable="false" />
+          <Property Name="UserPhoto" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_TableUsers_TableRoles">
+          <End Role="TableRoles" Type="Self.TableRoles" Multiplicity="1" />
+          <End Role="TableUsers" Type="Self.TableUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="TableUsers">
+              <PropertyRef Name="UserRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TestBaseQWERTModelContainer">
+          <EntitySet Name="TableRoles" EntityType="Self.TableRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TableUsers" EntityType="Self.TableUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TableUsers_TableRoles" Association="Self.FK_TableUsers_TableRoles">
+            <End Role="TableRoles" EntitySet="TableRoles" />
+            <End Role="TableUsers" EntitySet="TableUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestBaseQWERTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestBaseQWERTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TableRoles" EntityType="TestBaseQWERTModel.TableRoles" />
+          <EntitySet Name="TableUsers" EntityType="TestBaseQWERTModel.TableUsers" />
+          <AssociationSet Name="FK_TableUsers_TableRoles" Association="TestBaseQWERTModel.FK_TableUsers_TableRoles">
+            <End Role="TableRoles" EntitySet="TableRoles" />
+            <End Role="TableUsers" EntitySet="TableUsers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TableRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TableUsers" Relationship="TestBaseQWERTModel.FK_TableUsers_TableRoles" FromRole="TableRoles" ToRole="TableUsers" />
+        </EntityType>
+        <EntityType Name="TableUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserSurname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPatronymic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserBirthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserRole" Type="Int32" Nullable="false" />
+          <Property Name="UserPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="Int32" Nullable="false" />
+          <Property Name="UserPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TableRoles" Relationship="TestBaseQWERTModel.FK_TableUsers_TableRoles" FromRole="TableUsers" ToRole="TableRoles" />
+        </EntityType>
+        <Association Name="FK_TableUsers_TableRoles">
+          <End Type="TestBaseQWERTModel.TableRoles" Role="TableRoles" Multiplicity="1" />
+          <End Type="TestBaseQWERTModel.TableUsers" Role="TableUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableRoles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="TableUsers">
+              <PropertyRef Name="UserRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TestBaseQWERTModelContainer" CdmEntityContainer="TestBaseQWERTEntities">
+          <EntitySetMapping Name="TableRoles">
+            <EntityTypeMapping TypeName="TestBaseQWERTModel.TableRoles">
+              <MappingFragment StoreEntitySet="TableRoles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableUsers">
+            <EntityTypeMapping TypeName="TestBaseQWERTModel.TableUsers">
+              <MappingFragment StoreEntitySet="TableUsers">
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserBirthday" ColumnName="UserBirthday" />
+                <ScalarProperty Name="UserPatronymic" ColumnName="UserPatronymic" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
